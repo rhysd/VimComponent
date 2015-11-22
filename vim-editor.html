@@ -1,0 +1,125 @@
+<link rel="import" href="./bower_components/polymer/polymer.html" />
+
+<dom-module id="vim-editor">
+  <template>
+    <style>
+      .vimjs-container {
+        padding:0;
+        overflow:hidden;
+        width:800px;
+        height:600px;
+        line-height:1;
+        font: 12px monospace;
+        position:relative;
+        /* from Darkside */
+        background-color:#222324;
+        color:#bababa;
+      }
+
+      .vimjs-canvas {
+        width:100%;
+        height:100%;
+        display:none;
+      }
+
+      .vimjs-invisible {
+        position:absolute;
+        right:100%;
+        bottom:100%;
+      }
+
+      .vimjs-font-test {
+        font-style: normal;
+        font-variant: normal;
+        font-weight: normal;
+        font-stretch: normal;
+        font-size: 12px;
+        font-family: monospace;
+        line-height: normal;
+        padding: 0px;
+      }
+    </style>
+
+    <div id="vimjs-container" class="vimjs-container">
+      <canvas id="vimjs-canvas"></canvas>
+    </div>
+    <audio id="vimjs-beep" src="[[beep]]"></audio>
+    <input id='vimjs-file' class='vimjs-invisible' type='file'/>
+    <div id="vimjs-font-test" class="vimjs-font-test vimjs-invisible">m</div>
+    <div id='vimjs-trigger-dialog' class='modal'>
+      <div class='modal-dialog'>
+        <div class='modal-content'>
+          <div class='modal-header'>
+            <h4 class='modal-title'>Ugly workaround for Chrome</h4>
+          </div>
+          <div class='modal-body'>
+            <button id='vimjs-trigger-button' type='button' class='btn btn-primary'>Click Me</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    __vimjs_memory_initializer = './dist/vim.js.mem';
+
+    (function() { 'use strict';
+
+      Polymer({
+        is: 'vim-editor',
+
+        properties: {
+          args: {
+            type: Array,
+            value: []
+          },
+          didStart: {
+            type: Object,
+            value: null
+          },
+          willStart: {
+            type: Object,
+            value: null
+          }
+        },
+
+        ready: function() {
+
+          let self = this;
+          var Module = {
+            noInitialRun: false,
+            noExitRuntime: true,
+            arguments: this.args,
+            preRun: [
+                function() {
+                    vimjs.pre_run();
+                    if (self.willStart) {
+                        self.willStart();
+                    }
+                },
+            ],
+            postRun: [
+                function() {
+                    if (self.didStart) {
+                        self.didStart();
+                    }
+                }
+            ],
+            print: function() {
+                console.group.apply(console, arguments);
+                console.groupEnd();
+            },
+            printErr: function() {
+                console.group.apply(console, arguments);
+                console.groupEnd();
+            },
+          };
+
+          let vimjs_loader = document.createElement('script');
+          vimjs_loader.src = './dist/vim.js';
+          document.getElementById('vimjs-font-test').parentNode.appendChild(vimjs_loader);
+        }
+      });
+    })();
+  </script>
+</dom-module>
