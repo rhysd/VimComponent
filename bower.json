@@ -1,14 +1,19 @@
 {
   "name": "vim-component",
+  "description": "Polymer component of vim.js",
+  "version": "0.0.1",
+  "keywords": [
+    "vim.js",
+    "editor",
+    "polymer"
+  ],
+  "homepage": "https://github.com/rhysd/VimComponent",
   "authors": [
     "rhysd <lin90162@yahoo.co.jp>"
   ],
-  "description": "",
-  "main": "",
-  "moduleType": [],
+  "main": "vim-editor.html",
   "license": "MIT",
   "homepage": "",
-  "private": true,
   "dependencies": {
     "polymer": "~1.2.3"
   },
