@@ -73,9 +73,17 @@
             type: Array,
             value: []
           },
+          beep: {
+            type: String,
+            value: ''
+          },
           didStart: {
             type: Object,
             value: null
+          },
+          vimrc: {
+            type: String,
+            value: ''
           },
           willStart: {
             type: Object,
@@ -92,6 +100,9 @@
             arguments: this.args,
             preRun: [
                 function() {
+                    if (self.vimrc && localStorage && !localStorage['vimjs/root/.vimrc']) {
+                      localStorage['vimjs/root/.vimrc'] = self.vimrc;
+                    }
                     vimjs.pre_run();
                     if (self.willStart) {
                         self.willStart();
