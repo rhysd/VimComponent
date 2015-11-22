@@ -1,0 +1,24 @@
+{
+  "name": "vim-component",
+  "version": "0.0.1",
+  "description": "Polymer component of vim.js",
+  "main": "vim-editor.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rhysd/VimComponent.git"
+  },
+  "keywords": [
+    "polymer",
+    "vim.js",
+    "editor"
+  ],
+  "author": "rhysd <lin90162@yahoo.co.jp>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rhysd/VimComponent/issues"
+  },
+  "homepage": "https://github.com/rhysd/VimComponent#readme"
+}
